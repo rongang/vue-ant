@@ -8,14 +8,13 @@
     <a-date-picker :defaultValue="moment()" />
   </div> -->
 	
-	<div id="app">
-		<baselayout></baselayout>
+	<div>
 		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-import baselayout from './components/baselayout.vue';
+// import baselayout from './components/baselayout.vue';
 import moment from 'moment';
 import { version } from 'ant-design-vue';
 export default {
@@ -27,8 +26,11 @@ export default {
 		};
 	},
 	components: {
-		baselayout
-	}
+		// baselayout
+	},
+	// created(){
+	// 	this.$router.push('/home')
+	// }
 };
 </script>
 

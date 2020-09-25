@@ -1,14 +1,10 @@
 <template>
-	<h1>Home</h1>
+  <div>home</div>
 </template>
 
 <script>
-	export default{
-		created() {
-			console.log('home')
-		}
-	}
+export default {};
 </script>
 
 <style>
-</style>
+</style>>
