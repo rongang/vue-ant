@@ -6,8 +6,9 @@
       v-model="collapsed"
       :trigger="null"
       collapsible
+      :style="{ overflow: 'auto', height: '100vh', left: 0 }"
     >
-      <div class="logo" @click="homeRoute">
+      <div class="logo" @click="homeRoute" style=" cursor: pointer;">
         <h4 class="logotitle">
           <span v-show="collapsed"
             ><a-icon type="smile" theme="outlined"
@@ -40,6 +41,16 @@
         <a-menu-item key="/statement">
           <router-link to="/statement"
             ><a-icon type="sliders" /><span>状态管理</span></router-link
+          >
+        </a-menu-item>
+        <a-menu-item key="/localstore">
+          <router-link to="/localstore"
+            ><a-icon type="sliders" /><span>本地存储</span></router-link
+          >
+        </a-menu-item>
+        <a-menu-item key="/weather">
+          <router-link to="/weather"
+            ><a-icon type="sliders" /><span>天气中心</span></router-link
           >
         </a-menu-item>
         <a-menu-item key="3">
@@ -92,6 +103,15 @@
   </a-layout>
 </template>
 <script>
+/*
+      :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }"
+.slider {
+  height: 100vh;
+  cursor: pointer;
+  position: fixed;
+  overflow-y: scroll;
+}
+*/
 export default {
   name: "baselayout",
   data() {
@@ -157,12 +177,9 @@ export default {
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
 }
-.slider {
-  height: 100vh;
-  cursor: pointer;
-}
 .contentHeader {
   display: flex;
   justify-content: space-between;
 }
+
 </style>

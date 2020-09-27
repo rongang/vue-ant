@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 // import { constantRouterMap } from '@/config/router.config'
-
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 // hack router push callback
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location, onResolve, onReject) {
@@ -14,7 +15,7 @@ const constantRouterMap = [
 	{
 		path: '/',
 		redirect: '/home',
-		component: () => import('../components/baselayout.vue'),
+		component: () => import('../layout/baselayout.vue'),
 		children: [
 			{
 				path: 'home',
@@ -46,6 +47,20 @@ const constantRouterMap = [
 					title: '状态管理',
 				}
 			},
+			{
+				path: 'localstore',
+				component: () => import('../views/localstore/LocalStore.vue'),
+				meta: {
+					title: '本地存储',
+				}
+			},
+			{
+				path: 'weather',
+				component: () => import('../views/axios/Weather.vue'),
+				meta: {
+					title: '天气中心',
+				}
+			},
 		]
 	},
 	{
@@ -57,7 +72,7 @@ const constantRouterMap = [
 	},
 	{
 		path: '/reload',
-		component: () => import('../components/blanklayout.vue'),
+		component: () => import('../layout/blanklayout.vue'),
 	},
 
 
@@ -94,10 +109,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+	NProgress.start()
 	console.log(to)
-	document.title = 'vue-ant - '+ (to.meta && to.meta.title)
+	document.title = 'vue-ant - ' + (to.meta && to.meta.title)
 	// console.log(process.env.VUE_APP_TITLE)
-	next()
+	setTimeout(() => {
+		NProgress.done()
+		next()
+	}, 200);
+
 })
 // router.afterEach((to,from)=>{
 // 	console.log('afterEach')
