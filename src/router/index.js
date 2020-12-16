@@ -26,6 +26,13 @@ const constantRouterMap = [
 			},
 			{
 				path: 'general/button',
+				redirect: to => {
+					console.log(to)
+					const { hash, params, query } = to
+					console.log(query)
+					console.log(params)
+					console.log(hash)
+				},
 				component: () => import('../views/general/VueButton.vue'),
 				meta: {
 					title: '按钮',

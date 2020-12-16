@@ -6,7 +6,7 @@
       v-model="collapsed"
       :trigger="null"
       collapsible
-      :style="{ overflow: 'auto', height: '100vh', left: 0 }"
+      :style="{ overflow: 'auto', height: '100vh', position:'fixed', left: 0 }"
     >
       <div class="logo" @click="homeRoute" style=" cursor: pointer;">
         <h4 class="logotitle">
@@ -59,7 +59,7 @@
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
-    <a-layout>
+    <a-layout :class="collapsed?'contentclose':'contentopen'">
       <a-layout-header
         class="contentHeader"
         style="background: #fff; padding: 0"
@@ -165,6 +165,16 @@ export default {
   color: black;
   text-align: center;
   line-height: 32px;
+}
+.contentopen{
+  padding-left: 200px;
+  transition: 0.2s;
+  height: 100vmax;
+}
+.contentclose{
+  padding-left: 80px;
+  transition: 0.2s;
+  height: 100vmax;
 }
 
 .trigger:hover {

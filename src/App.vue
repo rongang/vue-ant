@@ -16,6 +16,8 @@
 <script>
 // import baselayout from './components/baselayout.vue';
 import moment from 'moment';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 import { version } from 'ant-design-vue';
 export default {
 	name: 'App',

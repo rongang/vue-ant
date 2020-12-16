@@ -5,29 +5,48 @@
     </div>
     <div v-if="weather || false">
       <a-affix :offset-top="top">
-        <weatherheader
+       
+      </a-affix> <weatherheader
           :weatherdis="weather.aqi"
           v-on:refresh="fetchData"
         ></weatherheader>
-      </a-affix>
-      <a-radio-group
-        style="margin-left: 24px"
-        :value="selectday"
-        @change="handlechange"
-      >
-        <a-radio-button
+      <div style="margin-left: 24px">
+        <a-radio-group :value="selectday" @change="handlechange">
+          <a-radio-button
+            v-for="(day, index) in weather.data"
+            :key="index"
+            :value="index"
+          >
+            {{ day.date }}
+          </a-radio-button>
+        </a-radio-group>
+        <div
           v-for="(day, index) in weather.data"
           :key="index"
-          :value="index"
-          class="radio"
+          v-show="index === selectday"
         >
-          {{ day.date }}
-        </a-radio-button>
-      </a-radio-group>
-      <div v-for="(day, index) in weather.data" :key="index">
-      <p v-for="(a, index) in day.index" :key="index">{{ a }}</p>
+          <a-row
+            ><h1>{{ day.wea }}</h1>
+            <p>{{ day.day }}</p></a-row
+          >
+          <a-list item-layout="horizontal" :data-source="day.index">
+            <a-list-item slot="renderItem" slot-scope="item, index" :key="index">
+              <a-list-item-meta
+                :description="item.desc"
+              >
+                <a  slot="title" href="https://www.antdv.com/">{{
+                  item.title+'\r'
+                }}{{item.level}}</a>
+                <a-avatar
+                  slot="avatar"
+                 style="backgroundColor:#1890ff"
+                ><a-icon type="bulb"  theme="twoTone" /></a-avatar>
+              </a-list-item-meta>
+            </a-list-item>
+          </a-list>
+
+        </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -74,13 +93,16 @@ export default {
     return {
       selectday: 0,
       top: 0,
-      weather: null,
+      weather:'',
     };
   },
   components: {
     weatherheader,
   },
   created() {
+    let obj = {a:3}
+    console.log(Object.getOwnPropertyDescriptors(obj))
+    console.log("==============>"+process.env.VUE_APP_TITLE)
     setTimeout(() => {
       this.fetchData();
     }, 1000);
@@ -89,7 +111,7 @@ export default {
     async fetchData() {
       console.log("fetchdata");
       var data = await getNowWeather();
-      console.log(data);
+      // console.log(data);
       this.weather = data;
     },
     handlechange(e) {
@@ -102,11 +124,5 @@ export default {
 <style>
 .loading {
   margin: 100px 50%;
-}
-.weatherdetial {
-  width: 10000000px !important;
-}
-.radio {
-  float: left;
 }
 </style>>
